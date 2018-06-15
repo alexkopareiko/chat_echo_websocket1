@@ -4,14 +4,43 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import App from './App';
-//import './index.css';
-import reducer from './reducers';
+const addConactBtn = document.querySelectorAll('.addContact')[0];
+const list = document.querySelectorAll('.list')[0];
+const contactInput = document.querySelectorAll('.contactInput')[0];
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+function contact(state = [], action) {
+  if (action.type === 'ADD_CONTACT') {
+    return [
+      ...state,
+      action.payload
+    ]
+  }
+  return state;
+}
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+
+const store = createStore(contact);
+
+store.dispatch({ type: 'ADD_CONTACT', payload: 'Nicolay' });
+store.dispatch({ type: 'ADD_CONTACT', payload: 'Boris' });
+
+
+
+
+store.subscribe(() => {
+  list.innerHTML = ''; //очистка контейнера
+  contactInput.value = '';
+
+  store.getState().forEach(contact => {
+    const li = document.createElement('li');
+    li.textContent = contact;
+    list.appendChild(li);
+  })
+
+})
+
+addConactBtn.addEventListener('click', () =>  {
+  const contactName = contactInput.value;
+  store.dispatch({ type: 'ADD_CONTACT', payload: contactInput });
+
+});
