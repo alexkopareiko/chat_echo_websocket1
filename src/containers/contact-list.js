@@ -24,9 +24,7 @@ class ContactList extends Component {
 
 function mapStateToProps (state) {
   return  {
-    contact: [
-      ...state.contact,
-      ...state.add ]
+    contact: state.contact
 
   };
 

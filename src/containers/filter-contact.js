@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {add} from '../actions/add-contact';
+import {filter} from '../actions/filter-contact';
 
 
 
@@ -23,6 +23,8 @@ class AddContact extends Component {
       photo: this.photoInput.value
     }
     this.props.add (contact);
+    console.log(this.firstInput.value);
+
   }
 
   showForm () {
@@ -61,7 +63,7 @@ class AddContact extends Component {
 
 function mapStateToProps (state) {
   return {
-    contact: state
+    contact: state.contact
   };
 
 }
