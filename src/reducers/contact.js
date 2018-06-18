@@ -25,7 +25,7 @@ export default function () {
       tel: "123423454",
       company: "company3",
       email: "mail3@mail.com",
-      photo: "http://www.iconsplace.com/icons/preview/aqua/contacts-2-256.png"
+      photo: "http://www.myziptel.com/static/f_website/img/contacts.ico"
     }
   ]
 }
