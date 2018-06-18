@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {select} from '../actions/index';
+import AddContact from './add-contact';
+import FilterContact from './filter-contact';
+
 
 class ContactList extends Component {
   showList () {
@@ -15,16 +18,21 @@ class ContactList extends Component {
   }
   render () {
     return (
-      <ul>
-        {this.showList ()}
-      </ul>
+      <div>
+        <AddContact />
+        <FilterContact />
+        <ul>
+          {this.showList ()}
+        </ul>
+      </div>
     );
   }
 }
 
 function mapStateToProps (state) {
+
   return  {
-    contact: state.contact
+    contact: state.contact.filter(contactTemp => contactTemp.firstName.toLowerCase().includes(state.filter.toLowerCase()))
 
   };
 

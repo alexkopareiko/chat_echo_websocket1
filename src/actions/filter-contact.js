@@ -1,6 +1,6 @@
-export const filter = (contact) => {
+export const filter = (firstName) => {
   return {
     type: "CONTACT_FILTER",
-    payload: contact
+    payload: firstName
   }
 };

@@ -1,6 +1,8 @@
-export default function (state=null, action) {
+const initialState = '';
+
+export default function (state=initialState, action) {
   switch(action.type) {
-    case "CONTACT_FILTER ":
+    case "CONTACT_FILTER":
       return action.payload;
       break;
     default:

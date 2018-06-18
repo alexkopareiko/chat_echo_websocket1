@@ -5,7 +5,7 @@ import {filter} from '../actions/filter-contact';
 
 
 
-class AddContact extends Component {
+class FilterContact extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,41 +13,18 @@ class AddContact extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    var contact = {
-      id: Date.now().toString(),
-      firstName: this.firstInput.value,
-      lastName: this.lastInput.value,
-      tel: this.telInput.value,
-      company: this.companyInput.value,
-      email: this.emailInput.value,
-      photo: this.photoInput.value
-    }
-    this.props.add (contact);
-    console.log(this.firstInput.value);
+    var firstName = this.filterInput.value;
+
+    this.props.filter (firstName);
 
   }
 
   showForm () {
     return (
       <form onSubmit={this.handleSubmit}>
-      <h2>Добавление</h2>
+      <h2>Поиск</h2>
         Имя:<br />
-        <input type="text" ref={(input) => { this.firstInput = input; }} />
-        <br />
-        Фамилия:<br />
-        <input type="text" ref={(input) => { this.lastInput = input; }} />
-        <br />
-        Телефон:<br />
-        <input type="number" ref={(input) => { this.telInput = input; }} />
-        <br />
-        Email:<br />
-        <input type="email" ref={(input) => { this.emailInput = input; }} />
-        <br />
-        Компания:<br />
-        <input type="text" ref={(input) => { this.companyInput = input; }}/>
-        <br />
-        Фото:<br />
-        <input type="url" ref={(input) => { this.photoInput = input; }} />
+        <input type="text" ref={(input) => { this.filterInput = input; }} onChange={this.handleSubmit}/>
         <br /><br />
         <input type="submit" value="Submit" />
       </form>
@@ -69,7 +46,7 @@ function mapStateToProps (state) {
 }
 
 function matchDispatchToProps (dispatch) {
-  return bindActionCreators({add: add}, dispatch)
+  return bindActionCreators({filter: filter}, dispatch)
 }
 
-export default connect (mapStateToProps, matchDispatchToProps)(AddContact);
+export default connect (mapStateToProps, matchDispatchToProps)(FilterContact);

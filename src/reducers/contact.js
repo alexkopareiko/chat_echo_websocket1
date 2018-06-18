@@ -26,12 +26,13 @@ const initialState = [
     email: "mail3@mail.com",
     photo: "http://www.myziptel.com/static/f_website/img/contacts.ico"
   }
-];
+]
 
 
 export default function contactReducers(state = initialState, action) {
   switch(action.type) {
     case "CONTACT_ADD":
+    
     return [
       ...state,
       action.payload
