@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {select} from '../actions/index';
 import AddContact from './add-contact';
 import FilterContact from './filter-contact';
+import DeleteContact from './delete-contact';
 
 
 class ContactList extends Component {
@@ -12,7 +13,7 @@ class ContactList extends Component {
       return (
         <li
          onClick={() => this.props.select (contactRow)}
-         key={contactRow.id}>{contactRow.firstName}</li>
+         key={contactRow.id}>{contactRow.firstName} <DeleteContact contactId = {contactRow.id}/></li> 
       );
     });
   }
@@ -21,6 +22,7 @@ class ContactList extends Component {
       <div>
         <AddContact />
         <FilterContact />
+        <h3>Contacts:</h3>
         <ul>
           {this.showList ()}
         </ul>

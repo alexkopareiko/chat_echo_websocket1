@@ -32,12 +32,17 @@ const initialState = [
 export default function contactReducers(state = initialState, action) {
   switch(action.type) {
     case "CONTACT_ADD":
-    
     return [
       ...state,
       action.payload
     ]
       break;
+
+    case "CONTACT_DELETE":
+    const contactId = action.payload;
+    return state.filter(contact => contact.id !== contactId);
+      break;
+
     default:
       return state;
   }

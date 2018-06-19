@@ -6,8 +6,8 @@ import Details from '../containers/details';
 
 const WebPage = () => (
   <div>
-    <h3>Contacts:</h3>
 
+    
     <ContactList />
 
     <hr />
