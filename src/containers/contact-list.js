@@ -5,6 +5,7 @@ import {select} from '../actions/index';
 import AddContact from './add-contact';
 import FilterContact from './filter-contact';
 import DeleteContact from './delete-contact';
+import { Link } from 'react-router-dom'
 
 
 class ContactList extends Component {
@@ -13,15 +14,17 @@ class ContactList extends Component {
       return (
         <li
          onClick={() => this.props.select (contactRow)}
-         key={contactRow.id}>{contactRow.firstName} <DeleteContact contactId = {contactRow.id}/></li> 
+         key={contactRow.id}>{contactRow.firstName}&nbsp;
+         <DeleteContact contactId = {contactRow.id}/>&nbsp;
+         <Link to={{pathname: '/edit', state: { fromDashboard: contactRow }}}>Edit</Link>
+         </li>
       );
     });
   }
   render () {
     return (
       <div>
-        <AddContact />
-        <FilterContact />
+
         <h3>Contacts:</h3>
         <ul>
           {this.showList ()}
@@ -32,7 +35,7 @@ class ContactList extends Component {
 }
 
 function mapStateToProps (state) {
-
+  
   return  {
     contact: state.contact.filter(contactTemp => contactTemp.firstName.toLowerCase().includes(state.filter.toLowerCase()))
 

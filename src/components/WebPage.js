@@ -1,15 +1,15 @@
 import React from 'react';
 import ContactList from '../containers/contact-list';
 import Details from '../containers/details';
-import EditContact from '../containers/edit-contact';
-
+import Main from './Main';
+import Header from './Header';
 
 const WebPage = () => (
   <div>
 
-    <EditContact />
+    <Header />
+    <Main />
     <ContactList />
-
     <hr />
     <h3>Details:</h3>
     <Details />
