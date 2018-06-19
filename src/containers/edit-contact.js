@@ -11,6 +11,7 @@ class EditContact extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
       }
 
+
   handleSubmit(e) {
     e.preventDefault();
     var contact = {
@@ -26,30 +27,30 @@ class EditContact extends Component {
   }
 
   showForm () {
-    console.log(this.props.location.state.fromDashboard);
+    //console.log(this.props.location.state.fromDashboard);
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} key={Date.now().toString()}> //key задает уникальность формы => true rendering
       <h2>Редактирование</h2>
         Id:<br />
-        <input type="text" ref={(input) => { this.idInput = input; }} value={this.props.location.state.fromDashboard.id}/>
+        <input type="text" ref={(input) => { this.idInput = input; }} defaultValue={this.props.location.state.fromDashboard.id} required={true} />
         <br />
         Имя:<br />
-        <input type="text" ref={(input) => { this.firstInput = input; }} value={this.props.location.state.fromDashboard.firstName}/>
+        <input type="text" ref={(input) => { this.firstInput = input; }} defaultValue={this.props.location.state.fromDashboard.firstName} required={true}/>
         <br />
         Фамилия:<br />
-        <input type="text" ref={(input) => { this.lastInput = input; }} value={this.props.location.state.fromDashboard.lastName}/>
+        <input type="text" ref={(input) => { this.lastInput = input; }} defaultValue={this.props.location.state.fromDashboard.lastName} required={true} />
         <br />
         Телефон:<br />
-        <input type="number" ref={(input) => { this.telInput = input; }} value={this.props.location.state.fromDashboard.tel}/>
+        <input type="number" ref={(input) => { this.telInput = input; }} defaultValue={this.props.location.state.fromDashboard.tel} required={true}/>
         <br />
         Email:<br />
-        <input type="email" ref={(input) => { this.emailInput = input; }} value={this.props.location.state.fromDashboard.company}/>
+        <input type="email" ref={(input) => { this.emailInput = input; }} defaultValue={this.props.location.state.fromDashboard.company} required={true}/>
         <br />
         Компания:<br />
-        <input type="text" ref={(input) => { this.companyInput = input; }} value={this.props.location.state.fromDashboard.email}/>
+        <input type="text" ref={(input) => { this.companyInput = input; }} defaultValue={this.props.location.state.fromDashboard.email} required={true}/>
         <br />
         Фото:<br />
-        <input type="url" ref={(input) => { this.photoInput = input; }} value={this.props.location.state.fromDashboard.photo}/>
+        <input type="url" ref={(input) => { this.photoInput = input; }} defaultValue={this.props.location.state.fromDashboard.photo} required={true}/>
         <br /><br />
         <input type="submit" value="Submit" />
       </form>
