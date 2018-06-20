@@ -1,6 +1,5 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import WebPage from './WebPage'
 import AddContact from '../containers/add-contact'
 import EditContact from '../containers/edit-contact'
 import FilterContact from '../containers/filter-contact'
