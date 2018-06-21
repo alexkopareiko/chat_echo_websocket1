@@ -17,11 +17,11 @@ class EditContact extends Component {
       tel: props.contact.tel,
       company: props.contact.company,
       formErrors: {email: '', firstName: '', lastName: '', photo: ''},
-      emailValid: false,
-      firstNameValid: false,
-      lastNameValid: false,
-      photoValid: false,
-      formValid: false,
+      emailValid: true,
+      firstNameValid: true,
+      lastNameValid: true,
+      photoValid: true,
+      formValid: true,
       tempIdForUpdate: props.contact.id
     }
   }
@@ -42,13 +42,7 @@ componentDidUpdate() {
     );
 
   }
-
-
 }
-
-  // checkInputForm() {
-  //   this.handleUserInput(this.firstInput.value, 'firstName');
-  // }
 
   handleUserInput(value_e, name_e){
     const name = name_e;
