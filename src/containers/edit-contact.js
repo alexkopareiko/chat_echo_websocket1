@@ -10,39 +10,67 @@ class EditContact extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      photo:'',
+      firstName: props.contact.firstName,
+      lastName: props.contact.lastName,
+      email: props.contact.email,
+      photo:props.contact.photo,
+      tel: props.contact.tel,
+      company: props.contact.company,
       formErrors: {email: '', firstName: '', lastName: '', photo: ''},
       emailValid: false,
       firstNameValid: false,
       lastNameValid: false,
       photoValid: false,
       formValid: false,
-      name: props.location.state.fromDashboard.firstName,
-      value1: ''
+      tempIdForUpdate: props.contact.id
     }
   }
 
-  /*handleUserInput = (e) => {
-    e.preventDefault();
-    name = e.target.name;
-    value1 = e.target.value;
-    this.setState({[name]: value},
-              () => { this.validateField(name, value) });
-    alert(e.target.value);
+componentDidUpdate() {
+  if(this.state.tempIdForUpdate != this.props.contact.id)
+  {
+    this.setState(
+      {
+        firstName: this.props.contact.firstName,
+        lastName: this.props.contact.lastName,
+        email: this.props.contact.email,
+        photo: this.props.contact.photo,
+        tel: this.props.contact.tel,
+        company: this.props.contact.company,
+        tempIdForUpdate: this.props.contact.id
+      }
+    );
 
-  }*/
+  }
 
 
-  handleUserInput(value, name){
-  //   this.setState({[name]: value},
-  //             () => { this.validateField(name, value) });
-  // //  console.log(state);
-    this.validateField(name, value);
+}
 
+  // checkInputForm() {
+  //   this.handleUserInput(this.firstInput.value, 'firstName');
+  // }
+
+  handleUserInput(value_e, name_e){
+    const name = name_e;
+    const value = value_e;
+
+    if(this.state.tempIdForUpdate == this.props.contact.id) {
+
+      this.setState(
+        {
+          firstName: this.firstInput.value,
+          lastName: this.lastInput.value,
+          email: this.emailInput.value,
+          photo: this.photoInput.value,
+          tel: this.telInput.value,
+          company: this.companyInput.value,
+          [name]: value
+        }
+      );
+      this.validateField(name, value);
     }
+
+  }
 
   validateField(fieldName, value) {
 
@@ -89,12 +117,14 @@ class EditContact extends Component {
       this.setState({formErrors: fieldValidationErrors,
                   emailValid: emailValid,
                   firstNameValid: firstNameValid,
-                  lastNameValid:lastNameValid
+                  lastNameValid:lastNameValid,
+                  photoValid:photoValid
                 }, this.validateForm);
   }
 
   validateForm() {
-    this.setState({formValid: this.state.emailValid && this.state.firstNameValid && this.state.lastNameValid && this.state.photo});
+    this.setState({formValid: this.state.emailValid && this.state.firstNameValid && this.state.lastNameValid && this.state.photoValid});
+    console.log(this.state.emailValid, this.state.firstNameValid, this.state.lastNameValid, this.state.photoValid);
   }
 
 
@@ -115,30 +145,31 @@ class EditContact extends Component {
     return (
       <div>
         <FormErrors formErrors={this.state.formErrors} />
-        <form onSubmit={this.handleSubmit} key={Date.now().toString()}>
+        <form onSubmit={this.handleSubmit}>
         <h2>Редактирование</h2>
+
           Id:<br />
-          <input type="text" ref={(input) => { this.idInput = input; }} readOnly value={this.props.location.state.fromDashboard.id} required={true} />
+          <input type="text" ref={(input) => { this.idInput = input; }} readOnly value={this.props.location.state.fromDashboard.id}/>
           <br />
           Имя:<br />
-          <input type="text" ref={(input) => { this.firstInput = input; }} placeholder={this.props.location.state.fromDashboard.firstName} onChange={e => this.handleUserInput(e.target.value, e.target.name)}  name="firstName" />
+          <input type="text" ref={(input) => { this.firstInput = input; }} value={this.state.firstName} onChange={e => this.handleUserInput(e.target.value, e.target.name)}  name="firstName"/>
           <br />
           Фамилия:<br />
-          <input type="text" ref={(input) => { this.lastInput = input; }}  defaultValue={this.props.location.state.fromDashboard.lastName} required={true} name="lastName" />
+          <input type="text" ref={(input) => { this.lastInput = input; }}  value={this.state.lastName} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true} name="lastName" />
           <br />
           Телефон:<br />
-          <input type="number" ref={(input) => { this.telInput = input; }} defaultValue={this.props.location.state.fromDashboard.tel} required={true} />
+          <input type="number" ref={(input) => { this.telInput = input; }} value={this.state.tel} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true} />
           <br />
           Email:<br />
-          <input type="email" ref={(input) => { this.emailInput = input; }}  defaultValue={this.props.location.state.fromDashboard.company} required={true}  name="email" />
+          <input type="email" ref={(input) => { this.emailInput = input; }}  value={this.state.email} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true}  name="email" />
           <br />
           Компания:<br />
-          <input type="text" ref={(input) => { this.companyInput = input; }} defaultValue={this.props.location.state.fromDashboard.email} required={true} />
+          <input type="text" ref={(input) => { this.companyInput = input; }} value={this.state.company} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true} />
           <br />
           Фото:<br />
-          <input type="url" ref={(input) => { this.photoInput = input; }}  defaultValue={this.props.location.state.fromDashboard.photo} required={true} name="photo"   />
+          <input type="url" ref={(input) => { this.photoInput = input; }}  value={this.state.photo} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true} name="photo"   />
           <br /><br />
-          <input type="submit" value="Submit" disabled={!this.state.formValid}/>
+          <input type="submit" value="Submit" disabled={!this.state.formValid} />
         </form>
       </div>
     );
@@ -151,7 +182,7 @@ class EditContact extends Component {
 
 function mapStateToProps (state) {
   return {
-    contact: state
+    contact: state.active
   };
 
 }

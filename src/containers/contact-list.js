@@ -10,19 +10,22 @@ class ContactList extends Component {
   showList () {
     return this.props.contact.map ((contactRow) => {
       return (
-        <li
-         onClick={() => this.props.select (contactRow)}
-         key={contactRow.id}>{contactRow.firstName}&nbsp;
-         <DeleteContact contactId = {contactRow.id}/>&nbsp;
-         <Link to={{pathname: '/edit', state: { fromDashboard: contactRow }}}>Edit</Link>
-         </li>
+        <div>
+            <li
+              onClick={() => this.props.select (contactRow)}
+              key={contactRow.id}>{contactRow.firstName}
+              &nbsp;&nbsp;<Link to={{pathname: '/edit', state: { fromDashboard: contactRow }}}>Edit</Link>&nbsp;&nbsp;
+            </li>
+
+            <DeleteContact contactId = {contactRow.id}/>&nbsp;
+
+       </div>
       );
     });
   }
   render () {
     return (
       <div>
-
         <h3>Contacts:</h3>
         <ul>
           {this.showList ()}

@@ -75,12 +75,13 @@ class AddContact extends Component {
       this.setState({formErrors: fieldValidationErrors,
                   emailValid: emailValid,
                   firstNameValid: firstNameValid,
-                  lastNameValid:lastNameValid
+                  lastNameValid:lastNameValid,
+                  photoValid:photoValid
                 }, this.validateForm);
   }
 
   validateForm() {
-    this.setState({formValid: this.state.emailValid && this.state.firstNameValid && this.state.lastNameValid && this.state.photo});
+    this.setState({formValid: this.state.emailValid && this.state.firstNameValid && this.state.lastNameValid && this.state.photoValid});
   }
 
   handleSubmit(e) {

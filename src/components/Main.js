@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import AddContact from '../containers/add-contact'
 import EditContact from '../containers/edit-contact'
 import FilterContact from '../containers/filter-contact'
+import Entry from '../containers/entry'
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -13,6 +14,7 @@ import FilterContact from '../containers/filter-contact'
 const Main = () => (
   <main>
     <Switch>
+      <Route exact path='/' component={Entry}/>
       <Route path='/search' component={FilterContact}/>
       <Route path='/add' component={AddContact}/>
       <Route path='/edit' component={EditContact}/>
