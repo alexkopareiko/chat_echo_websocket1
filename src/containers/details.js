@@ -7,8 +7,8 @@ class Details extends Component {
       return (<p>Выберите контакт...</p>);
     }
     return (
-      <div>
-      
+      <div key={Date.now().toString()}>
+
         <h2>{this.props.contact.firstName} {this.props.contact.lastName}</h2>
         <img src={this.props.contact.photo} /><br />
         <p>Телефон: {this.props.contact.tel}</p>

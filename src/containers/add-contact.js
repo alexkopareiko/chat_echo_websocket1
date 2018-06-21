@@ -102,29 +102,48 @@ class AddContact extends Component {
 
     return (
       <div>
+        <h2>Add contact</h2>
         <FormErrors formErrors={this.state.formErrors} />
 
-        <form onSubmit={this.handleSubmit} >
-          <h2>Добавление</h2>
-            Имя:<br />
-            <input type="text" ref={(input) => { this.firstInput = input; }} onChange={this.handleUserInput} name="firstName" required={true}/>
-            <br />
-            Фамилия:<br />
-            <input type="text" ref={(input) => { this.lastInput = input; }} onChange={this.handleUserInput} name="lastName" required={true}/>
-            <br />
-            Телефон:<br />
-            <input type="number" ref={(input) => { this.telInput = input; }} onChange={this.handleUserInput} required={true}/>
-            <br />
-            Email:<br />
-            <input type="email" ref={(input) => { this.emailInput = input; }} onChange={this.handleUserInput} name="email" required={true}/>
-            <br />
-            Компания:<br />
-            <input type="text" ref={(input) => { this.companyInput = input; }} onChange={this.handleUserInput} required={true}/>
-            <br />
-            Фото:<br />
-            <input type="url" ref={(input) => { this.photoInput = input; }} onChange={this.handleUserInput} name="photo"  required={true}/>
-            <br /><br />
-            <input type="submit" value="Submit" disabled={!this.state.formValid}/>
+
+        <form onSubmit={this.handleSubmit} class="ui form">
+          <div class="fields">
+            <div class={!this.state.firstNameValid ? "error field":"field"}>
+              <div class="ui input">
+                <input type="text" ref={(input) => { this.firstInput = input; }} onChange={this.handleUserInput} name="firstName" required={true} placeholder="Name"/>
+                </div>
+              </div>
+            <div class={!this.state.lastNameValid ? "error field":"field"}>
+                <div class="ui input">
+                  <input type="text" ref={(input) => { this.lastInput = input; }} onChange={this.handleUserInput} name="lastName" required={true} placeholder="Last Name"/>
+                </div>
+            </div>
+            </div>
+            <div class="fields">
+              <div class="field">
+                <div class="ui input">
+                  <input type="number" ref={(input) => { this.telInput = input; }} onChange={this.handleUserInput} required={true} placeholder='Tel: 123-456-7890'/>
+                </div>
+              </div>
+              <div class={!this.state.emailValid ? "error field":"field"}>
+                <div class="ui input">
+                  <input type="email" ref={(input) => { this.emailInput = input; }} onChange={this.handleUserInput} name="email" required={true} placeholder="Email"/>
+                </div>
+              </div>
+              </div>
+              <div class="fields">
+                <div class="field">
+                  <div class="ui input">
+            <input type="text" ref={(input) => { this.companyInput = input; }} onChange={this.handleUserInput} required={true} placeholder="Company"/>
+                  </div>
+                </div>
+              <div class={!this.state.photoValid ? "error field":"field"}>
+                <div class="ui input">
+                  <input type="url" ref={(input) => { this.photoInput = input; }} onChange={this.handleUserInput} name="photo"  required={true} placeholder="Photo: http://"/>
+                  </div>
+                </div>
+              </div>
+            <input type="submit" value="Submit" disabled={!this.state.formValid} class="ui button"/>
         </form>
       </div >
 

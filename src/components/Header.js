@@ -1,18 +1,28 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-// The Header creates links that can be used to navigate
-// between routes.
-const Header = () => (
-  <header>
-    <nav>
-      <ul>
-        <li><Link to='/search'>Поиск по имени</Link></li>
-        <li><Link to='/add'>Добавить контакт</Link></li>
+export default class Header extends Component {
+  state = {}
 
-      </ul>
-    </nav>
-  </header>
-)
+  render() {
 
-export default Header
+    return (
+      <Menu>
+        <Menu.Item
+          as={Link}
+          to='/search'
+        >
+          Search
+        </Menu.Item>
+
+        <Menu.Item
+          as={Link}
+          to='/add'
+        >
+          Add contact
+        </Menu.Item>
+      </Menu>
+    )
+  }
+}

@@ -118,17 +118,17 @@ componentDidUpdate() {
 
   validateForm() {
     this.setState({formValid: this.state.emailValid && this.state.firstNameValid && this.state.lastNameValid && this.state.photoValid});
-    console.log(this.state.emailValid, this.state.firstNameValid, this.state.lastNameValid, this.state.photoValid);
   }
 
 
   handleSubmit(e) {
     e.preventDefault();
     var contact = {
-      id: this.idInput.value,
+      id: this.props.location.state.fromDashboard.id,
       firstName: this.firstInput.value,
       lastName: this.lastInput.value,
       company: this.companyInput.value,
+      tel: this.telInput.value,
       email: this.emailInput.value,
       photo: this.photoInput.value
     }
@@ -138,32 +138,48 @@ componentDidUpdate() {
   showForm () {
     return (
       <div>
+        <h2>Edit contact</h2>
         <FormErrors formErrors={this.state.formErrors} />
-        <form onSubmit={this.handleSubmit}>
-        <h2>Редактирование</h2>
+        <form onSubmit={this.handleSubmit} class="ui form">
+          <div class="fields">
+            <div class={!this.state.firstNameValid ? "error field":"field"}>
+              <div class="ui input">
+                <input type="text" ref={(input) => { this.firstInput = input; }} value={this.state.firstName} onChange={e => this.handleUserInput(e.target.value, e.target.name)}  name="firstName" placeholder="Name"/>
+              </div>
+            </div>
+            <div class={!this.state.lastNameValid ? "error field":"field"}>
+                <div class="ui input">
+                  <input type="text" ref={(input) => { this.lastInput = input; }}  value={this.state.lastName} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true} name="lastName" placeholder="Last Name"/>
+                </div>
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <div class="ui input">
+                <input type="tel" placeholder='Tel: 123-456-7890' ref={(input) => { this.telInput = input; }} value={this.state.tel} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+              </div>
+            </div>
+            <div class={!this.state.emailValid ? "error field":"field"}>
+              <div class="ui input">
+                <input type="email" ref={(input) => { this.emailInput = input; }}  value={this.state.email} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true}  name="email" placeholder="Email"/>
+              </div>
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <div class="ui input">
+                <input type="text" ref={(input) => { this.companyInput = input; }} value={this.state.company} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true} placeholder="Company"/>
+              </div>
+            </div>
+            <div class={!this.state.photoValid ? "error field":"field"}>
+              <div class="ui input">
+                <input type="url" ref={(input) => { this.photoInput = input; }}  value={this.state.photo} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true} name="photo"   placeholder="Photo: http://"/>
+              </div>
+            </div>
+          </div>
+          <input type="submit" value="Submit" disabled={!this.state.formValid} class="ui button"/>
 
-          Id:<br />
-          <input type="text" ref={(input) => { this.idInput = input; }} readOnly value={this.props.location.state.fromDashboard.id}/>
-          <br />
-          Имя:<br />
-          <input type="text" ref={(input) => { this.firstInput = input; }} value={this.state.firstName} onChange={e => this.handleUserInput(e.target.value, e.target.name)}  name="firstName"/>
-          <br />
-          Фамилия:<br />
-          <input type="text" ref={(input) => { this.lastInput = input; }}  value={this.state.lastName} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true} name="lastName" />
-          <br />
-          Телефон:<br />
-          <input type="number" ref={(input) => { this.telInput = input; }} value={this.state.tel} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true} />
-          <br />
-          Email:<br />
-          <input type="email" ref={(input) => { this.emailInput = input; }}  value={this.state.email} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true}  name="email" />
-          <br />
-          Компания:<br />
-          <input type="text" ref={(input) => { this.companyInput = input; }} value={this.state.company} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true} />
-          <br />
-          Фото:<br />
-          <input type="url" ref={(input) => { this.photoInput = input; }}  value={this.state.photo} onChange={e => this.handleUserInput(e.target.value, e.target.name)} required={true} name="photo"   />
-          <br /><br />
-          <input type="submit" value="Submit" disabled={!this.state.formValid} />
+
         </form>
       </div>
     );

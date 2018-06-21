@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {filter} from '../actions/filter-contact';
+import { Icon, Input } from 'semantic-ui-react';
 
 
 
@@ -13,21 +14,17 @@ class FilterContact extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    var firstName = this.filterInput.value;
-
+    var firstName = e.target.value;
     this.props.filter (firstName);
-
   }
 
   showForm () {
     return (
-      <form onSubmit={this.handleSubmit}>
-      <h2>Поиск</h2>
-        Имя:<br />
-        <input type="text" ref={(input) => { this.filterInput = input; }} onChange={this.handleSubmit}/>
-        <br /><br />
-        <input type="submit" value="Submit" />
-      </form>
+      <div>
+        <h2>Search</h2>
+        <Input placeholder='Type a name...'  onChange={this.handleSubmit}/>
+      </div>
+
     );
   }
 
