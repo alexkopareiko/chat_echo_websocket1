@@ -5,14 +5,16 @@ import Main from './Main';
 import Header from './Header';
 
 const WebPage = () => (
-  <div>
+  <div class="div_main">
+    <div class="div_left">
+      <Header />
+      <Main />
+      <ContactList />
+    </div>
+      <div>
+      <Details />
+    </div>
 
-    <Header />
-    <Main />
-    <ContactList />
-    <hr />
-    <h3>Details:</h3>
-    <Details />
   </div>
 );
 

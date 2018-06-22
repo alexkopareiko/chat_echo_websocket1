@@ -145,7 +145,7 @@ componentDidUpdate() {
   handleSubmit(e) {
     e.preventDefault();
     var contact = {
-      id: this.props.location.state.fromDashboard.id,
+      id: this.props.contact.id,
       firstName: this.firstInput.value.trim(),
       lastName: this.lastInput.value.trim(),
       company: this.companyInput.value.trim(),

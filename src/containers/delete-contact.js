@@ -16,6 +16,7 @@ class DeleteContact extends Component {
     e.preventDefault();
     var contactId = this.props.contactId;
     this.props.deleteContact (contactId);
+    console.log(this.props);
   }
 
   showForm () {
